@@ -54,7 +54,7 @@
             padding: 0 15px;
         }
 
-        /* Header Styles */
+        /* Header Styles - Redesigned */
         header {
             background-color: white;
             box-shadow: var(--shadow);
@@ -89,57 +89,61 @@
             color: var(--accent);
         }
 
-        nav ul {
+        .header-actions {
             display: flex;
-            list-style: none;
+            align-items: center;
+            gap: 20px;
         }
 
-        nav ul li {
-            margin-left: 28px;
+        .search-container {
             position: relative;
         }
 
-        nav ul li a {
-            font-weight: 600;
-            font-size: 1.05rem;
+        .search-input {
+            width: 300px;
+            padding: 12px 45px 12px 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
             transition: var(--transition);
-            padding: 8px 0;
         }
 
-        nav ul li a:hover {
+        .search-input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
             color: var(--secondary);
         }
 
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary);
-            transition: var(--transition);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .header-icons {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .header-icons div {
-            cursor: pointer;
+        .cart-container {
             position: relative;
+        }
+
+        .cart-btn {
+            background: none;
+            color: var(--primary);
+            font-size: 1.5rem;
             padding: 8px;
             border-radius: 50%;
             transition: var(--transition);
+            position: relative;
         }
 
-        .header-icons div:hover {
+        .cart-btn:hover {
             background-color: var(--light);
         }
 
@@ -162,43 +166,8 @@
         .mobile-menu {
             display: none;
             font-size: 1.5rem;
-        }
-
-        /* Search Bar */
-        .search-bar {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            width: 300px;
-            background: white;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            border-radius: 0 0 8px 8px;
-            transform: translateY(-10px);
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            z-index: 1001;
-        }
-
-        .search-bar.active {
-            transform: translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 30px;
-            font-size: 1rem;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            border-color: var(--secondary);
+            background: none;
+            color: var(--primary);
         }
 
         /* Cart Sidebar */
@@ -483,40 +452,22 @@
             flex: 1;
         }
 
-        .payment-methods {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
         .payment-method {
-            flex: 1;
-            border: 2px solid #e0e0e0;
+            background: #f9f9f9;
             border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            min-height: 100px;
+            padding: 20px;
+            margin-top: 10px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-        }
-
-        .payment-method.active {
-            border-color: var(--secondary);
-            background: rgba(233, 69, 96, 0.05);
+            gap: 15px;
         }
 
         .payment-method i {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
+            font-size: 2rem;
             color: var(--primary);
         }
 
         .payment-method div {
-            font-size: 0.9rem;
             font-weight: 600;
         }
 
@@ -1155,8 +1106,8 @@
                 grid-template-columns: repeat(3, 1fr);
             }
             
-            nav ul li {
-                margin-left: 20px;
+            .search-input {
+                width: 250px;
             }
         }
 
@@ -1165,32 +1116,8 @@
                 display: block;
             }
             
-            nav {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                box-shadow: var(--shadow);
-                padding: 20px;
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: var(--transition);
-            }
-            
-            nav.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            nav ul {
-                flex-direction: column;
-            }
-            
-            nav ul li {
-                margin: 10px 0;
+            .search-input {
+                width: 200px;
             }
             
             .hero {
@@ -1258,24 +1185,6 @@
                 flex-direction: column;
                 gap: 0;
             }
-            
-            /* Mobile payment methods */
-            .payment-methods {
-                flex-direction: column;
-            }
-            
-            .payment-method {
-                min-height: 80px;
-                padding: 12px;
-            }
-            
-            .payment-method i {
-                font-size: 1.5rem;
-            }
-            
-            .payment-method div {
-                font-size: 0.85rem;
-            }
         }
 
         @media (max-width: 576px) {
@@ -1322,12 +1231,8 @@
                 width: 95%;
             }
             
-            .header-icons {
-                gap: 8px;
-            }
-            
-            .header-icons div {
-                padding: 6px;
+            .search-input {
+                width: 150px;
             }
         }
 
@@ -1366,30 +1271,24 @@
                 <i class="fas fa-crown"></i>Style<span>Hub</span>
             </div>
             
-            <nav id="main-nav">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#products">Shop</a></li>
-                    <li><a href="#">Collections</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-            
-            <div class="header-icons">
-                <div class="search" id="search-icon">
-                    <i class="fas fa-search"></i>
-                    <div class="search-bar" id="search-bar">
-                        <input type="text" class="search-input" id="search-input" placeholder="Search products...">
-                    </div>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Search products...">
+                    <button class="search-btn" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
-                <div class="cart" id="cart-icon">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count">0</span>
+                
+                <div class="cart-container">
+                    <button class="cart-btn" id="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </button>
                 </div>
-                <div class="mobile-menu" id="mobile-menu">
+                
+                <button class="mobile-menu" id="mobile-menu">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
             </div>
         </div>
     </header>
@@ -1466,26 +1365,14 @@
                 
                 <div class="checkout-section">
                     <h4>Payment Method</h4>
-                    <div class="payment-methods">
-                        <div class="payment-method active" data-method="momo">
-                            <i class="fas fa-mobile-alt"></i>
-                            <div>Mobile Money</div>
-                        </div>
-                        <div class="payment-method" data-method="card">
-                            <i class="far fa-credit-card"></i>
-                            <div>Credit Card</div>
-                        </div>
-                        <div class="payment-method" data-method="cash">
-                            <i class="fas fa-money-bill-wave"></i>
-                            <div>Cash on Delivery</div>
-                        </div>
+                    <div class="payment-method">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div>Mobile Money</div>
                     </div>
                     
-                    <div id="payment-details">
-                        <div class="form-group">
-                            <label for="momo-number">Mobile Money Number</label>
-                            <input type="tel" id="momo-number" class="form-control" placeholder="e.g. 059 306 6582" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="momo-number">Mobile Money Number</label>
+                        <input type="tel" id="momo-number" class="form-control" placeholder="e.g. 059 306 6582" required>
                     </div>
                 </div>
                 
@@ -1579,6 +1466,20 @@
             
             <div class="products-grid" id="products-grid">
                 <!-- Products will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Newsletter</h2>
+                <p>Subscribe to get updates on new arrivals, special offers and other discount information.</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
             </div>
         </div>
     </section>
@@ -1742,20 +1643,17 @@
 
         // Cart Data
         let cart = [];
-        let selectedPaymentMethod = 'momo';
 
         // DOM Elements
         const productsGrid = document.getElementById('products-grid');
         const categoryBtns = document.querySelectorAll('.category-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        const mainNav = document.getElementById('main-nav');
         const imageModal = document.getElementById('image-modal');
         const modalImage = document.getElementById('modal-image');
         const closeModal = document.getElementById('close-modal');
-        const searchIcon = document.getElementById('search-icon');
-        const searchBar = document.getElementById('search-bar');
         const searchInput = document.getElementById('search-input');
-        const cartIcon = document.getElementById('cart-icon');
+        const searchBtn = document.getElementById('search-btn');
+        const cartBtn = document.getElementById('cart-btn');
         const cartSidebar = document.getElementById('cart-sidebar');
         const closeCart = document.getElementById('close-cart');
         const cartItems = document.getElementById('cart-items');
@@ -1767,8 +1665,6 @@
         const closeCheckout = document.getElementById('close-checkout');
         const backToCart = document.getElementById('back-to-cart');
         const placeOrder = document.getElementById('place-order');
-        const paymentMethods = document.querySelectorAll('.payment-method');
-        const paymentDetails = document.getElementById('payment-details');
         const checkoutSummary = document.getElementById('checkout-summary');
 
         // Initialize the page
@@ -1872,11 +1768,6 @@
 
         // Setup Event Listeners
         function setupEventListeners() {
-            // Mobile menu toggle
-            mobileMenu.addEventListener('click', () => {
-                mainNav.classList.toggle('active');
-            });
-            
             // Category filter buttons
             categoryBtns.forEach(button => {
                 button.addEventListener('click', filterProducts);
@@ -1891,11 +1782,15 @@
             });
             
             // Search functionality
-            searchIcon.addEventListener('click', toggleSearch);
-            searchInput.addEventListener('input', searchProducts);
+            searchBtn.addEventListener('click', searchProducts);
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    searchProducts();
+                }
+            });
             
             // Cart functionality
-            cartIcon.addEventListener('click', openCart);
+            cartBtn.addEventListener('click', openCart);
             closeCart.addEventListener('click', closeCartSidebar);
             overlay.addEventListener('click', closeCartSidebar);
             
@@ -1904,31 +1799,6 @@
             closeCheckout.addEventListener('click', closeCheckoutModal);
             backToCart.addEventListener('click', backToCartFromCheckout);
             placeOrder.addEventListener('click', placeOrderHandler);
-            
-            // Payment method selection
-            paymentMethods.forEach(method => {
-                method.addEventListener('click', function() {
-                    paymentMethods.forEach(m => m.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedPaymentMethod = this.getAttribute('data-method');
-                    updatePaymentDetails();
-                });
-            });
-            
-            // Close search when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!searchIcon.contains(e.target) && !searchBar.contains(e.target)) {
-                    searchBar.classList.remove('active');
-                }
-            });
-        }
-
-        // Toggle search bar
-        function toggleSearch() {
-            searchBar.classList.toggle('active');
-            if (searchBar.classList.contains('active')) {
-                searchInput.focus();
-            }
         }
 
         // Search products
@@ -2154,45 +2024,6 @@
             openCart();
         }
 
-        // Update payment details based on selected method
-        function updatePaymentDetails() {
-            let paymentHTML = '';
-            
-            if (selectedPaymentMethod === 'momo') {
-                paymentHTML = `
-                    <div class="form-group">
-                        <label for="momo-number">Mobile Money Number</label>
-                        <input type="tel" id="momo-number" class="form-control" placeholder="e.g. 059 306 6582" required>
-                    </div>
-                `;
-            } else if (selectedPaymentMethod === 'card') {
-                paymentHTML = `
-                    <div class="form-group">
-                        <label for="card-number">Card Number</label>
-                        <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="expiry-date">Expiry Date</label>
-                            <input type="text" id="expiry-date" class="form-control" placeholder="MM/YY" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cvv">CVV</label>
-                            <input type="text" id="cvv" class="form-control" placeholder="123" required>
-                        </div>
-                    </div>
-                `;
-            } else if (selectedPaymentMethod === 'cash') {
-                paymentHTML = `
-                    <div class="form-group">
-                        <p>You will pay with cash when your order is delivered.</p>
-                    </div>
-                `;
-            }
-            
-            paymentDetails.innerHTML = paymentHTML;
-        }
-
         // Update checkout summary
         function updateCheckoutSummary() {
             checkoutSummary.innerHTML = '';
@@ -2235,28 +2066,11 @@
             const address = document.getElementById('address').value;
             const city = document.getElementById('city').value;
             const postalCode = document.getElementById('postal-code').value;
+            const momoNumber = document.getElementById('momo-number').value;
             
-            if (!firstName || !lastName || !email || !phone || !address || !city || !postalCode) {
+            if (!firstName || !lastName || !email || !phone || !address || !city || !postalCode || !momoNumber) {
                 alert('Please fill in all required fields.');
                 return;
-            }
-            
-            // Validate payment details based on selected method
-            if (selectedPaymentMethod === 'momo') {
-                const momoNumber = document.getElementById('momo-number').value;
-                if (!momoNumber) {
-                    alert('Please enter your Mobile Money number.');
-                    return;
-                }
-            } else if (selectedPaymentMethod === 'card') {
-                const cardNumber = document.getElementById('card-number').value;
-                const expiryDate = document.getElementById('expiry-date').value;
-                const cvv = document.getElementById('cvv').value;
-                
-                if (!cardNumber || !expiryDate || !cvv) {
-                    alert('Please fill in all card details.');
-                    return;
-                }
             }
             
             // Process order (in a real app, this would send data to a server)
@@ -2275,14 +2089,7 @@
             document.getElementById('address').value = '';
             document.getElementById('city').value = '';
             document.getElementById('postal-code').value = '';
-            
-            if (selectedPaymentMethod === 'momo') {
-                document.getElementById('momo-number').value = '';
-            } else if (selectedPaymentMethod === 'card') {
-                document.getElementById('card-number').value = '';
-                document.getElementById('expiry-date').value = '';
-                document.getElementById('cvv').value = '';
-            }
+            document.getElementById('momo-number').value = '';
         }
 
         // Show add to cart message
