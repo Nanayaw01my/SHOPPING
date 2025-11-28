@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -128,7 +128,7 @@
         .header-icons {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .header-icons div {
@@ -485,7 +485,7 @@
 
         .payment-methods {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             margin-top: 10px;
         }
 
@@ -497,6 +497,11 @@
             text-align: center;
             cursor: pointer;
             transition: var(--transition);
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .payment-method.active {
@@ -505,9 +510,14 @@
         }
 
         .payment-method i {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
             color: var(--primary);
+        }
+
+        .payment-method div {
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .order-summary {
@@ -835,8 +845,6 @@
         .product-card:hover .product-img img {
             transform: scale(1.05);
         }
-
-        /* Removed product-actions section */
 
         .product-info {
             padding: 20px;
@@ -1250,6 +1258,24 @@
                 flex-direction: column;
                 gap: 0;
             }
+            
+            /* Mobile payment methods */
+            .payment-methods {
+                flex-direction: column;
+            }
+            
+            .payment-method {
+                min-height: 80px;
+                padding: 12px;
+            }
+            
+            .payment-method i {
+                font-size: 1.5rem;
+            }
+            
+            .payment-method div {
+                font-size: 0.85rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1296,8 +1322,12 @@
                 width: 95%;
             }
             
-            .payment-methods {
-                flex-direction: column;
+            .header-icons {
+                gap: 8px;
+            }
+            
+            .header-icons div {
+                padding: 6px;
             }
         }
 
@@ -1352,9 +1382,6 @@
                     <div class="search-bar" id="search-bar">
                         <input type="text" class="search-input" id="search-input" placeholder="Search products...">
                     </div>
-                </div>
-                <div class="user">
-                    <i class="fas fa-user"></i>
                 </div>
                 <div class="cart" id="cart-icon">
                     <i class="fas fa-shopping-bag"></i>
