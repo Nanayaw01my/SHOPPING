@@ -1106,25 +1106,101 @@
         // Product Data
         const products = [
             {
-               
-
- {
                 id: 1,
-                name: "STREET CRED T-Shirt",
+                name: "Classic Cotton T-Shirt",
                 category: "shirts",
                 price: 89.99,
                 sizes: ["S", "M", "L", "XL"],
-                desktopImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/592019098_737172186088973_4752235190426663277_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGuCNBZFCN3jBiI53GvcEyVv-dRFrfIFAm_51EWt8gUCc91bfGC8nLCY98uq-fbw2GfRzxuC4xh7i5MBZ0METYh&_nc_ohc=Bb-8UHefr8kQ7kNvwFS4vsm&_nc_oc=AdnhWCKJTVUyDVfw_oY1LEbWgBiHWD-DvNDsR8Z5dR8cWiI8L3cZS4MYanwi1mFEA5g&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=ik71DsAOoq6v86Hpqoyf-w&oh=00_AfgExBKZ21TwyoExzfViFgQYt-rroE3gXrh3TGkrjj6S3Q&oe=692EF37A",
-                mobileImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/592019098_737172186088973_4752235190426663277_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGuCNBZFCN3jBiI53GvcEyVv-dRFrfIFAm_51EWt8gUCc91bfGC8nLCY98uq-fbw2GfRzxuC4xh7i5MBZ0METYh&_nc_ohc=Bb-8UHefr8kQ7kNvwFS4vsm&_nc_oc=AdnhWCKJTVUyDVfw_oY1LEbWgBiHWD-DvNDsR8Z5dR8cWiI8L3cZS4MYanwi1mFEA5g&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=ik71DsAOoq6v86Hpqoyf-w&oh=00_AfgExBKZ21TwyoExzfViFgQYt-rroE3gXrh3TGkrjj6S3Q&oe=692EF37A"
+                desktopImage: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                mobileImage: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "BESTSELLER",
+                rating: 4.5,
+                reviews: 128
             },
             {
                 id: 2,
-                name: "NSG Cap",
+                name: "Premium Baseball Cap",
                 category: "caps",
                 price: 74.99,
                 sizes: ["One Size"],
-                desktopImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/557735059_737172329422292_1159344754719549515_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeE7HEc2DwhH_xju7AONq-zh99geRW00zVD32B5FbTTNUG5mqnTXAwv42GVcf-DT7czjTKnAEpe4ewiUbHd96XiW&_nc_ohc=YMeG3z63bXwQ7kNvwE6FN6S&_nc_oc=AdnR6pILfhOJrTAWWhLwO_QE81O2jgrH-MWHBQVt7OFz1wjRrauyQ1Fb8XHCmbHhny4&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=p-1lwXQxYV7nhEerkSSVLg&oh=00_AfhSiEtG6rMWsn7zv_yly10nHQx7hD33Aqpo-PGrcGrnxg&oe=692EFB19",
-                mobileImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/557735059_7
+                desktopImage: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                mobileImage: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "NEW",
+                rating: 4.2,
+                reviews: 64
+            },
+            {
+                id: 3,
+                name: "Comfort Fit Hoodie",
+                category: "hoodies",
+                price: 149.99,
+                sizes: ["S", "M", "L", "XL", "XXL"],
+                desktopImage: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                mobileImage: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "TRENDING",
+                rating: 4.8,
+                reviews: 92
+            },
+            {
+                id: 4,
+                name: "Canvas Tote Bag",
+                category: "tote-bags",
+                price: 59.99,
+                sizes: ["One Size"],
+                desktopImage: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                mobileImage: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "SALE",
+                rating: 4.3,
+                reviews: 45
+            },
+            {
+                id: 5,
+                name: "Premium Polo Shirt",
+                category: "shirts",
+                price: 119.99,
+                sizes: ["S", "M", "L", "XL"],
+                desktopImage: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                mobileImage: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "",
+                rating: 4.6,
+                reviews: 78
+            },
+            {
+                id: 6,
+                name: "Embroidered Logo Cap",
+                category: "caps",
+                price: 84.99,
+                sizes: ["One Size"],
+                desktopImage: "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                mobileImage: "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "LIMITED",
+                rating: 4.4,
+                reviews: 56
+            },
+            {
+                id: 7,
+                name: "Zip-Up Hoodie",
+                category: "hoodies",
+                price: 164.99,
+                sizes: ["S", "M", "L", "XL", "XXL"],
+                desktopImage: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                mobileImage: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "",
+                rating: 4.7,
+                reviews: 103
+            },
+            {
+                id: 8,
+                name: "Eco-Friendly Tote",
+                category: "tote-bags",
+                price: 69.99,
+                sizes: ["One Size"],
+                desktopImage: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                mobileImage: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "ECO",
+                rating: 4.9,
+                reviews: 87
+            }
         ];
 
         // DOM Elements
