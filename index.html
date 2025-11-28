@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -369,6 +369,202 @@
             font-size: 3rem;
             margin-bottom: 15px;
             color: #ddd;
+        }
+
+        /* Checkout Modal */
+        .checkout-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .checkout-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .checkout-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .checkout-modal.active .checkout-content {
+            transform: translateY(0);
+        }
+
+        .checkout-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .checkout-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .close-checkout {
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-checkout:hover {
+            color: var(--secondary);
+        }
+
+        .checkout-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .checkout-section {
+            margin-bottom: 30px;
+        }
+
+        .checkout-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .payment-method {
+            flex: 1;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-method.active {
+            border-color: var(--secondary);
+            background: rgba(233, 69, 96, 0.05);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .order-summary {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #ddd;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .checkout-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-secondary {
+            background: var(--text-light);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background: #d63a55;
+            transform: translateY(-2px);
         }
 
         /* Overlay */
@@ -1082,6 +1278,11 @@
             .cart-sidebar {
                 width: 320px;
             }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1122,6 +1323,14 @@
             .cart-sidebar {
                 width: 100%;
                 right: -100%;
+            }
+            
+            .checkout-content {
+                width: 95%;
+            }
+            
+            .payment-methods {
+                flex-direction: column;
             }
         }
 
@@ -1211,7 +1420,93 @@
                 <span>Total:</span>
                 <span id="cart-total">GH₵ 0.00</span>
             </div>
-            <button class="checkout-btn">Proceed to Checkout</button>
+            <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="checkout-content">
+            <div class="checkout-header">
+                <h3>Checkout</h3>
+                <div class="close-checkout" id="close-checkout">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="checkout-body">
+                <div class="checkout-section">
+                    <h4>Shipping Information</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Shipping Address</label>
+                        <textarea id="address" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postal-code">Postal Code</label>
+                            <input type="text" id="postal-code" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkout-section">
+                    <h4>Payment Method</h4>
+                    <div class="payment-methods">
+                        <div class="payment-method active" data-method="momo">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>Mobile Money</div>
+                        </div>
+                        <div class="payment-method" data-method="card">
+                            <i class="far fa-credit-card"></i>
+                            <div>Credit Card</div>
+                        </div>
+                        <div class="payment-method" data-method="cash">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div>Cash on Delivery</div>
+                        </div>
+                    </div>
+                    
+                    <div id="payment-details">
+                        <div class="form-group">
+                            <label for="momo-number">Mobile Money Number</label>
+                            <input type="tel" id="momo-number" class="form-control" placeholder="e.g. 059 306 6582" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkout-section">
+                    <h4>Order Summary</h4>
+                    <div class="order-summary" id="checkout-summary">
+                        <!-- Order items will be dynamically added here -->
+                    </div>
+                </div>
+                
+                <div class="checkout-actions">
+                    <button class="btn-secondary" id="back-to-cart">Back to Cart</button>
+                    <button class="btn-primary" id="place-order">Place Order</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1453,6 +1748,7 @@
 
         // Cart Data
         let cart = [];
+        let selectedPaymentMethod = 'momo';
 
         // DOM Elements
         const productsGrid = document.getElementById('products-grid');
@@ -1472,6 +1768,14 @@
         const cartTotal = document.getElementById('cart-total');
         const cartCount = document.querySelector('.cart-count');
         const overlay = document.getElementById('overlay');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const checkoutModal = document.getElementById('checkout-modal');
+        const closeCheckout = document.getElementById('close-checkout');
+        const backToCart = document.getElementById('back-to-cart');
+        const placeOrder = document.getElementById('place-order');
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const paymentDetails = document.getElementById('payment-details');
+        const checkoutSummary = document.getElementById('checkout-summary');
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', () => {
@@ -1605,6 +1909,22 @@
             cartIcon.addEventListener('click', openCart);
             closeCart.addEventListener('click', closeCartSidebar);
             overlay.addEventListener('click', closeCartSidebar);
+            
+            // Checkout functionality
+            checkoutBtn.addEventListener('click', openCheckout);
+            closeCheckout.addEventListener('click', closeCheckoutModal);
+            backToCart.addEventListener('click', backToCartFromCheckout);
+            placeOrder.addEventListener('click', placeOrderHandler);
+            
+            // Payment method selection
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    paymentMethods.forEach(m => m.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedPaymentMethod = this.getAttribute('data-method');
+                    updatePaymentDetails();
+                });
+            });
             
             // Close search when clicking outside
             document.addEventListener('click', (e) => {
@@ -1818,6 +2138,162 @@
             cartSidebar.classList.remove('active');
             overlay.classList.remove('active');
             document.body.style.overflow = 'auto';
+        }
+
+        // Open checkout modal
+        function openCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Add some products before checkout.');
+                return;
+            }
+            
+            closeCartSidebar();
+            updateCheckoutSummary();
+            checkoutModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close checkout modal
+        function closeCheckoutModal() {
+            checkoutModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Back to cart from checkout
+        function backToCartFromCheckout() {
+            closeCheckoutModal();
+            openCart();
+        }
+
+        // Update payment details based on selected method
+        function updatePaymentDetails() {
+            let paymentHTML = '';
+            
+            if (selectedPaymentMethod === 'momo') {
+                paymentHTML = `
+                    <div class="form-group">
+                        <label for="momo-number">Mobile Money Number</label>
+                        <input type="tel" id="momo-number" class="form-control" placeholder="e.g. 059 306 6582" required>
+                    </div>
+                `;
+            } else if (selectedPaymentMethod === 'card') {
+                paymentHTML = `
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date</label>
+                            <input type="text" id="expiry-date" class="form-control" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" class="form-control" placeholder="123" required>
+                        </div>
+                    </div>
+                `;
+            } else if (selectedPaymentMethod === 'cash') {
+                paymentHTML = `
+                    <div class="form-group">
+                        <p>You will pay with cash when your order is delivered.</p>
+                    </div>
+                `;
+            }
+            
+            paymentDetails.innerHTML = paymentHTML;
+        }
+
+        // Update checkout summary
+        function updateCheckoutSummary() {
+            checkoutSummary.innerHTML = '';
+            let subtotal = 0;
+            const shipping = 20; // Fixed shipping cost
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const orderItem = document.createElement('div');
+                orderItem.className = 'order-item';
+                orderItem.innerHTML = `
+                    <div>${item.name} (${item.size}) x ${item.quantity}</div>
+                    <div>GH₵ ${itemTotal.toFixed(2)}</div>
+                `;
+                
+                checkoutSummary.appendChild(orderItem);
+            });
+            
+            const total = subtotal + shipping;
+            
+            const orderTotal = document.createElement('div');
+            orderTotal.className = 'order-total';
+            orderTotal.innerHTML = `
+                <div>Total</div>
+                <div>GH₵ ${total.toFixed(2)}</div>
+            `;
+            
+            checkoutSummary.appendChild(orderTotal);
+        }
+
+        // Place order handler
+        function placeOrderHandler() {
+            // Validate form
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const postalCode = document.getElementById('postal-code').value;
+            
+            if (!firstName || !lastName || !email || !phone || !address || !city || !postalCode) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Validate payment details based on selected method
+            if (selectedPaymentMethod === 'momo') {
+                const momoNumber = document.getElementById('momo-number').value;
+                if (!momoNumber) {
+                    alert('Please enter your Mobile Money number.');
+                    return;
+                }
+            } else if (selectedPaymentMethod === 'card') {
+                const cardNumber = document.getElementById('card-number').value;
+                const expiryDate = document.getElementById('expiry-date').value;
+                const cvv = document.getElementById('cvv').value;
+                
+                if (!cardNumber || !expiryDate || !cvv) {
+                    alert('Please fill in all card details.');
+                    return;
+                }
+            }
+            
+            // Process order (in a real app, this would send data to a server)
+            alert('Order placed successfully! Thank you for your purchase.');
+            
+            // Clear cart and close modals
+            cart = [];
+            updateCartUI();
+            closeCheckoutModal();
+            
+            // Reset form
+            document.getElementById('first-name').value = '';
+            document.getElementById('last-name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('address').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('postal-code').value = '';
+            
+            if (selectedPaymentMethod === 'momo') {
+                document.getElementById('momo-number').value = '';
+            } else if (selectedPaymentMethod === 'card') {
+                document.getElementById('card-number').value = '';
+                document.getElementById('expiry-date').value = '';
+                document.getElementById('cvv').value = '';
+            }
         }
 
         // Show add to cart message
