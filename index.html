@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DSGHub | Premium Fashion & Apparel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <script src="https://js.paystack.co/v1/inline.js"></script>
     <style>
         /* Base Styles */
         :root {
@@ -690,6 +691,22 @@
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
+                <div class="search-container" style="flex: 1; max-width: 400px; margin: 0 20px; position: relative;">
+                    <input type="text" id="searchInput" placeholder="Search products..." style="width: 100%; padding: 10px 15px 10px 40px; border-radius: 20px; border: 1px solid #ddd; outline: none; transition: var(--transition);">
+                    <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-light);"></i>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    <button class="mobile-menu" id="mobileMenu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
             </div>
         </div>
     </header>
@@ -1396,7 +1413,62 @@
                 slides[currentSlide].classList.add('active');
             }, 5000);
         }
+        <script>
+        /* ... Keep all your existing products and cart logic exactly as is ... */
+
+        // Updated Checkout Function with Paystack
+        function checkout() {
+            if (cart.length === 0) return;
+            
+            const userEmail = prompt("Please enter your email for the receipt:");
+            if (!userEmail) return;
+
+            checkoutBtn.innerHTML = '<div class="loading"></div>';
+            checkoutBtn.disabled = true;
+
+            // Paystack Integration
+            let handler = PaystackPop.setup({
+                key: 'YOUR_PAYSTACK_LIVE_SECRET_KEY', // REPLACE THIS WITH YOUR LIVE KEY
+                email: userEmail,
+                amount: Math.round(cartTotal * 100), // Amount in pesewas/cents
+                currency: 'GHS',
+                callback: function(response) {
+                    // Success logic
+                    showNotification('Payment Successful! Reference: ' + response.reference);
+                    cart = [];
+                    updateCart();
+                    closeCartSidebar();
+                    checkoutBtn.innerHTML = 'Checkout';
+                    checkoutBtn.disabled = false;
+                },
+                onClose: function() {
+                    showNotification('Transaction cancelled.');
+                    checkoutBtn.innerHTML = 'Checkout';
+                    checkoutBtn.disabled = false;
+                }
+            });
+
+            handler.openIframe();
+        }
+
+        // Simple Search Logic
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const term = e.target.value.toLowerCase();
+            const allCards = document.querySelectorAll('.product-card');
+            
+            allCards.forEach(card => {
+                const title = card.querySelector('.product-title').innerText.toLowerCase();
+                if(title.includes(term)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+
+        /* ... Keep the rest of your original slider and menu scripts ... */
     </script>
 </body>
 </html>
+
 
