@@ -1258,881 +1258,1308 @@
 </head>
 <body>
     <!-- Announcement Bar -->
-    <div class="announcement-bar">
-        <div class="container">
-            <i class="fas fa-shipping-fast"></i> FREE SHIPPING ON ORDERS OVER <span>GH₵ 200</span> | <i class="fas fa-undo"></i> 30-DAY RETURNS
+  <!-- Add these sections right before the closing </body> tag, after your existing JavaScript -->
+
+<!-- Wishlist Sidebar -->
+<div class="wishlist-sidebar" id="wishlist-sidebar">
+    <div class="wishlist-header">
+        <h3>Your Wishlist</h3>
+        <div class="close-wishlist" id="close-wishlist">
+            <i class="fas fa-times"></i>
         </div>
     </div>
-
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <i class="fas fa-crown"></i>Style<span>Hub</span>
-            </div>
-            
-            <div class="header-actions">
-                <div class="search-container">
-                    <input type="text" class="search-input" id="search-input" placeholder="Search products...">
-                    <button class="search-btn" id="search-btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                
-                <div class="cart-container">
-                    <button class="cart-btn" id="cart-btn">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count">0</span>
-                    </button>
-                </div>
-                
-                <button class="mobile-menu" id="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+    <div class="wishlist-items" id="wishlist-items">
+        <div class="empty-wishlist">
+            <i class="far fa-heart"></i>
+            <p>Your wishlist is empty</p>
         </div>
-    </header>
+    </div>
+    <div class="wishlist-footer">
+        <button class="btn-primary" id="wishlist-to-cart">Add All to Cart</button>
+    </div>
+</div>
 
-    <!-- Cart Sidebar -->
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h3>Your Cart</h3>
-            <div class="close-cart" id="close-cart">
+<!-- Product Quick View Modal -->
+<div class="quickview-modal" id="quickview-modal">
+    <div class="quickview-content">
+        <div class="quickview-close" id="close-quickview">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="quickview-body" id="quickview-body">
+            <!-- Quick view content will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<!-- Notification Toast -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Recently Viewed Section -->
+<section class="recently-viewed" id="recently-viewed">
+    <div class="container">
+        <div class="section-title">
+            <h2>Recently Viewed</h2>
+            <p>Items you recently looked at</p>
+        </div>
+        <div class="products-grid" id="recently-viewed-grid">
+            <!-- Recently viewed products will be dynamically added here -->
+        </div>
+    </div>
+</section>
+
+<!-- Size Guide Modal -->
+<div class="size-guide-modal" id="size-guide-modal">
+    <div class="size-guide-content">
+        <div class="size-guide-header">
+            <h3>Size Guide</h3>
+            <div class="close-size-guide" id="close-size-guide">
                 <i class="fas fa-times"></i>
             </div>
         </div>
-        <div class="cart-items" id="cart-items">
-            <!-- Cart items will be dynamically added here -->
-            <div class="empty-cart">
-                <i class="fas fa-shopping-bag"></i>
-                <p>Your cart is empty</p>
+        <div class="size-guide-body">
+            <div class="size-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Chest (cm)</th>
+                            <th>Waist (cm)</th>
+                            <th>Hip (cm)</th>
+                            <th>Length (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>S</td><td>86-91</td><td>71-76</td><td>86-91</td><td>66</td></tr>
+                        <tr><td>M</td><td>91-96</td><td>76-81</td><td>91-96</td><td>68</td></tr>
+                        <tr><td>L</td><td>96-101</td><td>81-86</td><td>96-101</td><td>70</td></tr>
+                        <tr><td>XL</td><td>101-106</td><td>86-91</td><td>101-106</td><td>72</td></tr>
+                        <tr><td>XXL</td><td>106-111</td><td>91-96</td><td>106-111</td><td>74</td></tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cart-total">GH₵ 0.00</span>
-            </div>
-            <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
-        </div>
-    </div>
-
-    <!-- Checkout Modal -->
-    <div class="checkout-modal" id="checkout-modal">
-        <div class="checkout-content">
-            <div class="checkout-header">
-                <h3>Checkout</h3>
-                <div class="close-checkout" id="close-checkout">
-                    <i class="fas fa-times"></i>
-                </div>
-            </div>
-            <div class="checkout-body">
-                <div class="checkout-section">
-                    <h4>Shipping Information</h4>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="first-name">First Name</label>
-                            <input type="text" id="first-name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="last-name">Last Name</label>
-                            <input type="text" id="last-name" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Shipping Address</label>
-                        <textarea id="address" class="form-control" rows="3" required></textarea>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="city">City</label>
-                            <input type="text" id="city" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="postal-code">Postal Code</label>
-                            <input type="text" id="postal-code" class="form-control" required>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="checkout-section">
-                    <h4>Payment Method</h4>
-                    <div class="payment-method">
-                        <i class="fas fa-mobile-alt"></i>
-                        <div>Mobile Money</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="momo-number">Mobile Money Number</label>
-                        <input type="tel" id="momo-number" class="form-control" placeholder="e.g. 059 306 6582" required>
-                    </div>
-                </div>
-                
-                <div class="checkout-section">
-                    <h4>Order Summary</h4>
-                    <div class="order-summary" id="checkout-summary">
-                        <!-- Order items will be dynamically added here -->
-                    </div>
-                </div>
-                
-                <div class="checkout-actions">
-                    <button class="btn-secondary" id="back-to-cart">Back to Cart</button>
-                    <button class="btn-primary" id="place-order">Place Order</button>
-                </div>
+            <div class="size-tips">
+                <h4>How to Measure:</h4>
+                <ul>
+                    <li><strong>Chest:</strong> Measure around the fullest part of your chest</li>
+                    <li><strong>Waist:</strong> Measure around your natural waistline</li>
+                    <li><strong>Hip:</strong> Measure around the fullest part of your hips</li>
+                </ul>
+                <p class="note"><i class="fas fa-info-circle"></i> All measurements are in centimeters</p>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
+<!-- Add these styles to your existing CSS -->
+<style>
+    /* Additional CSS for new features */
+    
+    /* Wishlist Sidebar */
+    .wishlist-sidebar {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 380px;
+        height: 100vh;
+        background: white;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 2000;
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .wishlist-sidebar.active {
+        right: 0;
+    }
+    
+    .wishlist-header {
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .wishlist-header h3 {
+        font-size: 1.3rem;
+        color: var(--primary);
+    }
+    
+    .close-wishlist {
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .close-wishlist:hover {
+        color: var(--secondary);
+    }
+    
+    .wishlist-items {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+    }
+    
+    .wishlist-item {
+        display: flex;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        position: relative;
+    }
+    
+    .wishlist-item-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-right: 15px;
+    }
+    
+    .wishlist-item-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .wishlist-item-details {
+        flex: 1;
+    }
+    
+    .wishlist-item-title {
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+    }
+    
+    .wishlist-item-price {
+        color: var(--secondary);
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    
+    .wishlist-item-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .remove-wishlist {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: var(--text-light);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .remove-wishlist:hover {
+        color: var(--secondary);
+    }
+    
+    .empty-wishlist {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--text-light);
+    }
+    
+    .empty-wishlist i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #ddd;
+    }
+    
+    .wishlist-footer {
+        padding: 20px;
+        border-top: 1px solid #eee;
+    }
+    
+    /* Quick View Modal */
+    .quickview-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 3000;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .quickview-modal.active {
+        display: flex;
+    }
+    
+    .quickview-content {
+        background: white;
+        width: 90%;
+        max-width: 900px;
+        border-radius: 12px;
+        overflow: hidden;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+    }
+    
+    .quickview-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 10;
+        background: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+    
+    .quickview-close:hover {
+        color: var(--secondary);
+        transform: rotate(90deg);
+    }
+    
+    .quickview-body {
+        padding: 30px;
+    }
+    
+    .quickview-product {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    
+    @media (max-width: 768px) {
+        .quickview-product {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .quickview-image {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .quickview-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    
+    .quickview-details h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        color: var(--primary);
+    }
+    
+    .quickview-price {
+        font-size: 1.5rem;
+        color: var(--secondary);
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    
+    .quickview-description {
+        margin-bottom: 25px;
+        line-height: 1.7;
+        color: var(--text);
+    }
+    
+    .quickview-actions {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .quickview-actions button {
+        flex: 1;
+    }
+    
+    .quickview-features {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+    
+    .quickview-features ul {
+        list-style: none;
+    }
+    
+    .quickview-features li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .quickview-features i {
+        color: var(--secondary);
+        margin-right: 10px;
+        width: 20px;
+    }
+    
+    /* Toast Notifications */
+    .toast-container {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        z-index: 4000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 350px;
+    }
+    
+    .toast {
+        background: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        animation: slideIn 0.3s ease;
+        border-left: 4px solid var(--secondary);
+    }
+    
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    .toast.success {
+        border-left-color: var(--success);
+    }
+    
+    .toast.error {
+        border-left-color: #dc3545;
+    }
+    
+    .toast.info {
+        border-left-color: var(--accent);
+    }
+    
+    .toast i {
+        font-size: 1.2rem;
+    }
+    
+    .toast.success i {
+        color: var(--success);
+    }
+    
+    .toast.error i {
+        color: #dc3545;
+    }
+    
+    .toast.info i {
+        color: var(--accent);
+    }
+    
+    .toast-content {
+        flex: 1;
+    }
+    
+    .toast-title {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .toast-message {
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+    
+    .toast-close {
+        color: var(--text-light);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .toast-close:hover {
+        color: var(--secondary);
+    }
+    
+    /* Recently Viewed Section */
+    .recently-viewed {
+        padding: 60px 0;
+        background: #f8f9fa;
+    }
+    
+    /* Size Guide Modal */
+    .size-guide-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 3000;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .size-guide-modal.active {
+        display: flex;
+    }
+    
+    .size-guide-content {
+        background: white;
+        width: 90%;
+        max-width: 800px;
+        border-radius: 12px;
+        overflow: hidden;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .size-guide-header {
+        background: var(--primary);
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .size-guide-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .close-size-guide {
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .close-size-guide:hover {
+        color: var(--secondary);
+    }
+    
+    .size-guide-body {
+        padding: 30px;
+    }
+    
+    .size-table {
+        overflow-x: auto;
+        margin-bottom: 30px;
+    }
+    
+    .size-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .size-table th,
+    .size-table td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #eee;
+    }
+    
+    .size-table th {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: var(--primary);
+    }
+    
+    .size-table tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+    
+    .size-tips h4 {
+        margin-bottom: 15px;
+        color: var(--primary);
+    }
+    
+    .size-tips ul {
+        list-style: none;
+        margin-bottom: 20px;
+    }
+    
+    .size-tips li {
+        margin-bottom: 10px;
+        padding-left: 25px;
+        position: relative;
+    }
+    
+    .size-tips li:before {
+        content: "•";
+        color: var(--secondary);
+        font-size: 1.5rem;
+        position: absolute;
+        left: 0;
+        top: -5px;
+    }
+    
+    .note {
+        background: #e3f2fd;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent);
+    }
+    
+    .note i {
+        font-size: 1.2rem;
+    }
+    
+    /* Product Card Enhancements */
+    .product-actions-top {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 2;
+        opacity: 0;
+        transition: var(--transition);
+    }
+    
+    .product-card:hover .product-actions-top {
+        opacity: 1;
+    }
+    
+    .action-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        cursor: pointer;
+        color: var(--primary);
+    }
+    
+    .action-btn:hover {
+        background: var(--secondary);
+        color: white;
+        transform: scale(1.1);
+    }
+    
+    .wishlist-btn {
+        position: relative;
+    }
+    
+    .wishlist-btn.active {
+        color: var(--secondary);
+    }
+    
+    .wishlist-btn.active i {
+        font-weight: 900;
+    }
+    
+    .quickview-btn {
+        position: relative;
+    }
+    
+    /* Stock Status */
+    .stock-status {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .in-stock {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .low-stock {
+        background: #fff3cd;
+        color: #856404;
+    }
+    
+    .out-of-stock {
+        background: #f8d7da;
+        color: #721c24;
+    }
+    
+    /* Product Badges */
+    .product-badge.discount {
+        background: linear-gradient(135deg, #ff6b6b, var(--secondary));
+    }
+    
+    .product-badge.new {
+        background: linear-gradient(135deg, #4ecdc4, #44a08d);
+    }
+    
+    .product-badge.hot {
+        background: linear-gradient(135deg, #ff9a00, #ff5e00);
+    }
+    
+    /* Sort and Filter Options */
+    .sort-filter-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .sort-options {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .sort-select {
+        padding: 10px 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background: white;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    
+    .filter-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: white;
+        border: 1px solid #e0e0e0;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .filter-btn:hover {
+        background: #f8f9fa;
+        border-color: var(--secondary);
+    }
+    
+    /* Product Comparison */
+    .compare-btn {
+        position: relative;
+    }
+    
+    .compare-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: var(--secondary);
+        color: white;
+        font-size: 0.7rem;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .wishlist-sidebar {
+            width: 100%;
+            right: -100%;
+        }
+        
+        .quickview-content {
+            width: 95%;
+            padding: 15px;
+        }
+        
+        .product-actions-top {
+            opacity: 1;
+        }
+        
+        .sort-filter-bar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
 
-    <!-- Image Modal -->
-    <div class="image-modal" id="image-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-modal">&times;</span>
-            <img id="modal-image" src="" alt="Product Image">
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Elevate Your Style Game</h1>
-            <p>Discover our premium collection of shirts, caps, hoodies, and tote bags designed for the modern individual who values quality and style.</p>
-            <a href="#products" class="btn">Shop Collection</a>
-            <a href="#" class="btn btn-outline">Learn More</a>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shipping-fast"></i>
-                    </div>
-                    <h3>Free Shipping</h3>
-                    <p>Free delivery on orders over GH₵ 200. Fast and reliable shipping across Ghana.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Secure Payment</h3>
-                    <p>Your payment information is safe with our encrypted checkout process.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-undo"></i>
-                    </div>
-                    <h3>Easy Returns</h3>
-                    <p>Not satisfied? Return within 30 days for a full refund or exchange.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>24/7 Support</h3>
-                    <p>Our customer service team is here to help you with any questions.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section class="products" id="products">
-        <div class="container">
-            <div class="section-title">
-                <h2>Featured Products</h2>
-                <p>Handpicked selection of premium quality apparel and accessories</p>
-            </div>
-            
-            <div class="category-filter">
-                <button class="category-btn active" data-category="all">All Products</button>
-                <button class="category-btn" data-category="shirts">Shirts</button>
-                <button class="category-btn" data-category="caps">Caps</button>
-                <button class="category-btn" data-category="hoodies">Hoodies</button>
-                <button class="category-btn" data-category="tote-bags">Tote Bags</button>
-            </div>
-            
-            <div class="products-grid" id="products-grid">
-                <!-- Products will be dynamically added here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-        <div class="container">
-            <div class="newsletter-content">
-                <h2>Join Our Newsletter</h2>
-                <p>Subscribe to get updates on new arrivals, special offers and other discount information.</p>
-                <form class="newsletter-form">
-                    <input type="email" class="newsletter-input" placeholder="Your email address" required>
-                    <button type="submit" class="newsletter-btn">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>StyleHub</h3>
-                    <p>We create premium apparel and accessories that combine style, comfort, and quality for the modern individual.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#products"><i class="fas fa-chevron-right"></i> Shop</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Customer Service</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Shipping Policy</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Returns & Refunds</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Size Guide</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Payment Methods</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Track Your Order</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Bogoso, Ghana</p>
-                    <p><i class="fas fa-phone"></i> +233 59 306 6582</p>
-                    <p><i class="fas fa-envelope"></i> info@DSGhub.com</p>
-                    
-                    <h4 style="margin-top: 20px; margin-bottom: 10px;">We Accept</h4>
-                    <div class="payment-methods">
-                        <div class="payment-method">Momo</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 NSGHub. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i> for fashion enthusiasts</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Product Data
-        const products = [
-            {
-                id: 1,
-                name: "STREET CRED T-Shirt",
-                category: "shirts",
-                price: 89.99,
-                sizes: ["S", "M", "L", "XL"],
-                desktopImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/592019098_737172186088973_4752235190426663277_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGuCNBZFCN3jBiI53GvcEyVv-dRFrfIFAm_51EWt8gUCc91bfGC8nLCY98uq-fbw2GfRzxuC4xh7i5MBZ0METYh&_nc_ohc=Bb-8UHefr8kQ7kNvwE0XgmB&_nc_oc=AdkU38BECrQGkwvSzLwNxRpZeHquY3rvkbt8WXIFgC6KLww6we0fpyc-Qkcf6zo3d2c&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=_JWGvGzHw9pJY5hgxWx4EA&oh=00_AfiqtC0j2tO-JWO8zm5Mh4h4AeDCHTHmfBB5KqzQQAvz8A&oe=692F63FA",
-                mobileImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/592019098_737172186088973_4752235190426663277_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGuCNBZFCN3jBiI53GvcEyVv-dRFrfIFAm_51EWt8gUCc91bfGC8nLCY98uq-fbw2GfRzxuC4xh7i5MBZ0METYh&_nc_ohc=Bb-8UHefr8kQ7kNvwE0XgmB&_nc_oc=AdkU38BECrQGkwvSzLwNxRpZeHquY3rvkbt8WXIFgC6KLww6we0fpyc-Qkcf6zo3d2c&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=_JWGvGzHw9pJY5hgxWx4EA&oh=00_AfiqtC0j2tO-JWO8zm5Mh4h4AeDCHTHmfBB5KqzQQAvz8A&oe=692F63FA",
-                badge: "BESTSELLER",
-                rating: 4.5,
-                reviews: 128
-            },
-            {
-                id: 2,
-                name: "NSG BROWN Cap",
-                category: "caps",
-                price: 74.99,
-                sizes: ["One Size"],
-                desktopImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/589304974_737172072755651_6204701457290073300_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEP5_sC5V4vNjXos6gCBpfShcyUGql7p8-FzJQaqXunz2EB2sLigyfpWBD8tXdWaYSxoZEgfe7iRa5rBJuka_wx&_nc_ohc=_PgtCLx5ZEoQ7kNvwF6vGbL&_nc_oc=Admdr4-jggrdNiQjU0S6xZJcet9IQZuwtZ8XpMk1UG58T7iSw3gXFjemMCJJCyHBOc8&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=dK9vQ8MT_kZ1nZDTyWcsHA&oh=00_Afgi-lS25kC447tpyBJQWtjVkXGXAsx7Z5uQgctQHKFN5A&oe=692F370D",
-                mobileImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/589304974_737172072755651_6204701457290073300_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEP5_sC5V4vNjXos6gCBpfShcyUGql7p8-FzJQaqXunz2EB2sLigyfpWBD8tXdWaYSxoZEgfe7iRa5rBJuka_wx&_nc_ohc=_PgtCLx5ZEoQ7kNvwF6vGbL&_nc_oc=Admdr4-jggrdNiQjU0S6xZJcet9IQZuwtZ8XpMk1UG58T7iSw3gXFjemMCJJCyHBOc8&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=dK9vQ8MT_kZ1nZDTyWcsHA&oh=00_Afgi-lS25kC447tpyBJQWtjVkXGXAsx7Z5uQgctQHKFN5A&oe=692F370D",
-                badge: "NEW",
-                rating: 4.2,
-                reviews: 64
-            },
-            {
-                id: 3,
-                name: "STREET CRED Hoodie",
-                category: "hoodies",
-                price: 149.99,
-                sizes: ["S", "M", "L", "XL", "XXL"],
-                desktopImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/590517732_737171936088998_4937788045065354081_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEm_9z2zJunMtsTUSbDcr9QUktHTDfk6F1SS0dMN-ToXX3REOsGfQhKwgL-19q-jH4Dx1OmUWb8lojWzM45Bo1e&_nc_ohc=Pg7gAicpgnsQ7kNvwEgvaoE&_nc_oc=AdmJA7-kxIRHx16n5Pd9WnJUzRN4Sxc6US-Rgntuv-30PuTJnfbEVvyoeqh5eNV8c-o&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=xWfyhfwVz9oRj8vJkVU83Q&oh=00_AfhDzO9N1vrd9HVQZ0flAwzPqfiAbAK_cCOfaE-WUMmeig&oe=692F4B00",
-                mobileImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/590517732_737171936088998_4937788045065354081_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEm_9z2zJunMtsTUSbDcr9QUktHTDfk6F1SS0dMN-ToXX3REOsGfQhKwgL-19q-jH4Dx1OmUWb8lojWzM45Bo1e&_nc_ohc=Pg7gAicpgnsQ7kNvwEgvaoE&_nc_oc=AdmJA7-kxIRHx16n5Pd9WnJUzRN4Sxc6US-Rgntuv-30PuTJnfbEVvyoeqh5eNV8c-o&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=xWfyhfwVz9oRj8vJkVU83Q&oh=00_AfhDzO9N1vrd9HVQZ0flAwzPqfiAbAK_cCOfaE-WUMmeig&oe=692F4B00",
-                badge: "TRENDING",
-                rating: 4.8,
-                reviews: 92
-            },
-            {
-                id: 4,
-                name: "NSG Tote Bag",
-                category: "tote-bags",
-                price: 59.99,
-                sizes: ["One Size"],
-                desktopImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/587341382_737171889422336_7532695980420008403_n.jpg?stp=dst-jpg_s590x590_tt6&_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH9TtojGTJIfbFjRdaT7nG-JxEyB1Y4z_MnETIHVjjP80DbDuWTNgfFKy3yNktOLXlqMbSIYx-n2PTxPRAPMgWu&_nc_ohc=tcuIFWL6XRcQ7kNvwH22tja&_nc_oc=Adl6C4Mwkiuq_gJ2Sk3mqRm4IiPQ4NvQBNdnc8ynROjcX5cWX739RjGTkNEaCwyAcj4&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=Rl1rOeaRRl22fH6Qias3DA&oh=00_AfiwmBCYVQ-4vlXmhvIZfomUMfmFGopjWmlusgw4UmpuUQ&oe=692F4F9E",
-                mobileImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/587341382_737171889422336_7532695980420008403_n.jpg?stp=dst-jpg_s590x590_tt6&_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH9TtojGTJIfbFjRdaT7nG-JxEyB1Y4z_MnETIHVjjP80DbDuWTNgfFKy3yNktOLXlqMbSIYx-n2PTxPRAPMgWu&_nc_ohc=tcuIFWL6XRcQ7kNvwH22tja&_nc_oc=Adl6C4Mwkiuq_gJ2Sk3mqRm4IiPQ4NvQBNdnc8ynROjcX5cWX739RjGTkNEaCwyAcj4&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=Rl1rOeaRRl22fH6Qias3DA&oh=00_AfiwmBCYVQ-4vlXmhvIZfomUMfmFGopjWmlusgw4UmpuUQ&oe=692F4F9E",
-                badge: "SALE",
-                rating: 4.3,
-                reviews: 45
-            },
-            {
-                id: 5,
-                name: "NSG Shirt",
-                category: "shirts",
-                price: 119.99,
-                sizes: ["S", "M", "L", "XL"],
-                desktopImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/590719115_737171926088999_7171439917035848590_n.jpg?stp=dst-jpg_s590x590_tt6&_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH5b90tjCL_5oqqRc9d0twZOEr0PhLIdCY4SvQ-Esh0Jhoez0I8R-bqHy4i2I-_6dxvxy9YzdmmDrM6zeipu6IN&_nc_ohc=0DmPlPKMprIQ7kNvwG3iWpc&_nc_oc=AdkOPoP0wDZKN2s2fUXzBGARWndnxjJ4kUiCfyLDMGArqvl40hNy_Rs9FauAkxXB4iU&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=Rl1rOeaRRl22fH6Qias3DA&oh=00_AfjD2EQew3n9ky3WCBaEJO_mjmgHJDpqYTR2y-ASnCJiIw&oe=692F4EF9",
-                mobileImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/590719115_737171926088999_7171439917035848590_n.jpg?stp=dst-jpg_s590x590_tt6&_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH5b90tjCL_5oqqRc9d0twZOEr0PhLIdCY4SvQ-Esh0Jhoez0I8R-bqHy4i2I-_6dxvxy9YzdmmDrM6zeipu6IN&_nc_ohc=0DmPlPKMprIQ7kNvwG3iWpc&_nc_oc=AdkOPoP0wDZKN2s2fUXzBGARWndnxjJ4kUiCfyLDMGArqvl40hNy_Rs9FauAkxXB4iU&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=Rl1rOeaRRl22fH6Qias3DA&oh=00_AfjD2EQew3n9ky3WCBaEJO_mjmgHJDpqYTR2y-ASnCJiIw&oe=692F4EF9",
-                badge: "",
-                rating: 4.6,
-                reviews: 78
-            },
-            {
-                id: 6,
-                name: "NSG pink Cap",
-                category: "caps",
-                price: 84.99,
-                sizes: ["One Size"],
-                desktopImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/557735059_737172329422292_1159344754719549515_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeE7HEc2DwhH_xju7AONq-zh99geRW00zVD32B5FbTTNUG5mqnTXAwv42GVcf-DT7czjTKnAEpe4ewiUbHd96XiW&_nc_ohc=YMeG3z63bXwQ7kNvwHdLh0J&_nc_oc=AdlAm62j5gqdylChxjI7z0hvikmOSeAg-no5c-eIKQQCFKY6SDy6wDlzlX7Z2n8uMQ8&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=1g3gIRvHxSTzPAxuLcRieA&oh=00_AfiChg8FF2IfMt0aXa2RJTJNeNWhPZJnyVGFJBoFufPTSg&oe=692F3359",
-                mobileImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/557735059_737172329422292_1159344754719549515_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeE7HEc2DwhH_xju7AONq-zh99geRW00zVD32B5FbTTNUG5mqnTXAwv42GVcf-DT7czjTKnAEpe4ewiUbHd96XiW&_nc_ohc=YMeG3z63bXwQ7kNvwHdLh0J&_nc_oc=AdlAm62j5gqdylChxjI7z0hvikmOSeAg-no5c-eIKQQCFKY6SDy6wDlzlX7Z2n8uMQ8&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=1g3gIRvHxSTzPAxuLcRieA&oh=00_AfiChg8FF2IfMt0aXa2RJTJNeNWhPZJnyVGFJBoFufPTSg&oe=692F3359",
-                badge: "LIMITED",
-                rating: 4.4,
-                reviews: 56
-            },
-            {
-                id: 7,
-                name: "NSG Hoodie",
-                category: "hoodies",
-                price: 164.99,
-                sizes: ["S", "M", "L", "XL", "XXL"],
-                desktopImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/588837361_737172242755634_6867376098288742481_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHb5_v0zu4TITIRQi3FcrG9s0kIRqWvIgGzSQhGpa8iAT81eDao_J8Fnawfe6HOjEt2YGvC35K9eyMjGGBSUACx&_nc_ohc=Q95zCx90B1sQ7kNvwFWGjfS&_nc_oc=AdmKgZfOBFgoveHTU2cr2GsP2AjML0aBjaaaUpsqr_4keBqWNo-xkg-NSn3XFjEoO4c&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=A52JIAYI4Fv_ZSjxUbojWw&oh=00_AfhgDpDSemIdMxuFyj5rBwfkwTJFWyQABruPQjUt1YhvOA&oe=692F4DEE",
-                mobileImage: "https://scontent.facc6-1.fna.fbcdn.net/v/t39.30808-6/588837361_737172242755634_6867376098288742481_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHb5_v0zu4TITIRQi3FcrG9s0kIRqWvIgGzSQhGpa8iAT81eDao_J8Fnawfe6HOjEt2YGvC35K9eyMjGGBSUACx&_nc_ohc=Q95zCx90B1sQ7kNvwFWGjfS&_nc_oc=AdmKgZfOBFgoveHTU2cr2GsP2AjML0aBjaaaUpsqr_4keBqWNo-xkg-NSn3XFjEoO4c&_nc_zt=23&_nc_ht=scontent.facc6-1.fna&_nc_gid=A52JIAYI4Fv_ZSjxUbojWw&oh=00_AfhgDpDSemIdMxuFyj5rBwfkwTJFWyQABruPQjUt1YhvOA&oe=692F4DEE",
-                badge: "",
-                rating: 4.7,
-                reviews: 103
-            },
-            {
-                id: 8,
-                name: "STREET CRED Tote",
-                category: "tote-bags",
-                price: 69.99,
-                sizes: ["One Size"],
-                desktopImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/586737947_737179262754932_5385525624325669539_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHEqyAMYGggH0PR9VqOoeKurQYtkZX3k6WtBi2RlfeTpfdiRq8ZC6eL6EPdOBeIGospc9fC7NQVeqfq_xDeaQGE&_nc_ohc=FPBZzo0e7h0Q7kNvwEy945A&_nc_oc=Adk1eW_DKYEVeTa_XoI-P4ijSVLYbk5JUiybGaa8qTUzhieUPgrMh6Ss21cbxc7M_vI&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=oWalD-ubiBmUuSliG9fXfg&oh=00_AfgWzSXvTbnbuxQI6F3xoTcDIp1lfv-oEYrgHMBCX2vgng&oe=692F47FC",
-                mobileImage: "https://scontent.facc1-1.fna.fbcdn.net/v/t39.30808-6/586737947_737179262754932_5385525624325669539_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHEqyAMYGggH0PR9VqOoeKurQYtkZX3k6WtBi2RlfeTpfdiRq8ZC6eL6EPdOBeIGospc9fC7NQVeqfq_xDeaQGE&_nc_ohc=FPBZzo0e7h0Q7kNvwEy945A&_nc_oc=Adk1eW_DKYEVeTa_XoI-P4ijSVLYbk5JUiybGaa8qTUzhieUPgrMh6Ss21cbxc7M_vI&_nc_zt=23&_nc_ht=scontent.facc1-1.fna&_nc_gid=oWalD-ubiBmUuSliG9fXfg&oh=00_AfgWzSXvTbnbuxQI6F3xoTcDIp1lfv-oEYrgHMBCX2vgng&oe=692F47FC",
-                badge: "ECO",
-                rating: 4.9,
-                reviews: 87
-            }
-        ];
-
-        // Cart Data
-        let cart = [];
-
-        // DOM Elements
-        const productsGrid = document.getElementById('products-grid');
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const imageModal = document.getElementById('image-modal');
-        const modalImage = document.getElementById('modal-image');
-        const closeModal = document.getElementById('close-modal');
-        const searchInput = document.getElementById('search-input');
-        const searchBtn = document.getElementById('search-btn');
-        const cartBtn = document.getElementById('cart-btn');
-        const cartSidebar = document.getElementById('cart-sidebar');
-        const closeCart = document.getElementById('close-cart');
-        const cartItems = document.getElementById('cart-items');
-        const cartTotal = document.getElementById('cart-total');
-        const cartCount = document.querySelector('.cart-count');
-        const overlay = document.getElementById('overlay');
-        const checkoutBtn = document.getElementById('checkout-btn');
-        const checkoutModal = document.getElementById('checkout-modal');
-        const closeCheckout = document.getElementById('close-checkout');
-        const backToCart = document.getElementById('back-to-cart');
-        const placeOrder = document.getElementById('place-order');
-        const checkoutSummary = document.getElementById('checkout-summary');
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', () => {
-            displayProducts(products);
-            setupEventListeners();
-            updateCartUI();
+<!-- Add this JavaScript after your existing script -->
+<script>
+    // Additional JavaScript for new features
+    
+    // Wishlist functionality
+    let wishlist = [];
+    let recentlyViewed = [];
+    let comparedProducts = [];
+    
+    // DOM Elements for new features
+    const wishlistSidebar = document.getElementById('wishlist-sidebar');
+    const closeWishlist = document.getElementById('close-wishlist');
+    const wishlistItems = document.getElementById('wishlist-items');
+    const wishlistToCartBtn = document.getElementById('wishlist-to-cart');
+    const quickviewModal = document.getElementById('quickview-modal');
+    const closeQuickview = document.getElementById('close-quickview');
+    const quickviewBody = document.getElementById('quickview-body');
+    const toastContainer = document.getElementById('toast-container');
+    const recentlyViewedGrid = document.getElementById('recently-viewed-grid');
+    const sizeGuideModal = document.getElementById('size-guide-modal');
+    const closeSizeGuide = document.getElementById('close-size-guide');
+    
+    // Initialize new features
+    function initializeNewFeatures() {
+        // Add wishlist button to header
+        const headerActions = document.querySelector('.header-actions');
+        const wishlistBtn = document.createElement('button');
+        wishlistBtn.className = 'cart-btn';
+        wishlistBtn.id = 'wishlist-btn';
+        wishlistBtn.innerHTML = '<i class="far fa-heart"></i><span class="wishlist-count">0</span>';
+        headerActions.insertBefore(wishlistBtn, cartBtn);
+        
+        // Add event listeners
+        document.getElementById('wishlist-btn').addEventListener('click', openWishlist);
+        closeWishlist.addEventListener('click', closeWishlistSidebar);
+        wishlistToCartBtn.addEventListener('click', addAllWishlistToCart);
+        closeQuickview.addEventListener('click', closeQuickviewModal);
+        overlay.addEventListener('click', () => {
+            closeWishlistSidebar();
+            closeQuickviewModal();
+            closeSizeGuideModal();
         });
-
-        // Display Products
-        function displayProducts(productsToShow) {
-            productsGrid.innerHTML = '';
-            
-            productsToShow.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.dataset.category = product.category;
-                
-                const sizeOptions = product.sizes.map(size => 
-                    `<option value="${size}">${size}</option>`
-                ).join('');
-                
-                // Generate star rating
-                const stars = generateStarRating(product.rating);
-                
-                productCard.innerHTML = `
-                    ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
-                    <div class="product-img" data-image="${product.desktopImage}">
-                        <img src="${product.desktopImage}" alt="${product.name}" class="desktop-img">
-                        <img src="${product.mobileImage}" alt="${product.name}" class="mobile-img">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">${formatCategory(product.category)}</div>
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-price">GH₵ ${product.price.toFixed(2)}</div>
-                        <div class="product-rating">
-                            <div class="stars">${stars}</div>
-                            <div class="rating-count">(${product.reviews})</div>
-                        </div>
-                        <div class="product-actions-bottom">
-                            <select class="size-select" id="size-${product.id}">
-                                ${sizeOptions}
-                            </select>
-                            <button class="add-to-cart" data-id="${product.id}">
-                                <i class="fas fa-shopping-cart"></i> Add
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                productsGrid.appendChild(productCard);
-            });
-            
-            // Add event listeners to product images for modal
-            document.querySelectorAll('.product-img').forEach(img => {
-                img.addEventListener('click', function() {
-                    const imageSrc = this.getAttribute('data-image');
-                    openImageModal(imageSrc);
-                });
-            });
-            
-            // Add event listeners to add to cart buttons
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = parseInt(this.getAttribute('data-id'));
-                    const sizeSelect = document.getElementById(`size-${productId}`);
-                    const selectedSize = sizeSelect.value;
-                    addToCart(productId, selectedSize);
-                });
-            });
-        }
-
-        // Generate star rating HTML
-        function generateStarRating(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 !== 0;
-            
-            for (let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            
-            if (hasHalfStar) {
-                stars += '<i class="fas fa-star-half-alt"></i>';
-            }
-            
-            const emptyStars = 5 - Math.ceil(rating);
-            for (let i = 0; i < emptyStars; i++) {
-                stars += '<i class="far fa-star"></i>';
-            }
-            
-            return stars;
-        }
-
-        // Format category for display
-        function formatCategory(category) {
-            return category.split('-').map(word => 
-                word.charAt(0).toUpperCase() + word.slice(1)
-            ).join(' ');
-        }
-
-        // Setup Event Listeners
-        function setupEventListeners() {
-            // Category filter buttons
-            categoryBtns.forEach(button => {
-                button.addEventListener('click', filterProducts);
-            });
-            
-            // Image modal
-            closeModal.addEventListener('click', closeImageModal);
-            imageModal.addEventListener('click', (e) => {
-                if (e.target === imageModal) {
-                    closeImageModal();
-                }
-            });
-            
-            // Search functionality
-            searchBtn.addEventListener('click', searchProducts);
-            searchInput.addEventListener('keyup', (e) => {
-                if (e.key === 'Enter') {
-                    searchProducts();
-                }
-            });
-            
-            // Cart functionality
-            cartBtn.addEventListener('click', openCart);
-            closeCart.addEventListener('click', closeCartSidebar);
-            overlay.addEventListener('click', closeCartSidebar);
-            
-            // Checkout functionality
-            checkoutBtn.addEventListener('click', openCheckout);
-            closeCheckout.addEventListener('click', closeCheckoutModal);
-            backToCart.addEventListener('click', backToCartFromCheckout);
-            placeOrder.addEventListener('click', placeOrderHandler);
-        }
-
-        // Search products
-        function searchProducts() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            
-            if (searchTerm === '') {
-                displayProducts(products);
-                return;
-            }
-            
-            const filteredProducts = products.filter(product => 
-                product.name.toLowerCase().includes(searchTerm) || 
-                product.category.toLowerCase().includes(searchTerm)
-            );
-            
-            displayProducts(filteredProducts);
-        }
-
-        // Open image modal
-        function openImageModal(imageSrc) {
-            modalImage.src = imageSrc;
-            imageModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close image modal
-        function closeImageModal() {
-            imageModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Filter Products by Category
-        function filterProducts(e) {
-            const category = e.target.dataset.category;
-            
-            // Update active button
-            categoryBtns.forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-            
-            if (category === 'all') {
-                displayProducts(products);
-            } else {
-                const filteredProducts = products.filter(product => product.category === category);
-                displayProducts(filteredProducts);
-            }
-        }
-
-        // Add to Cart
-        function addToCart(productId, size) {
+        closeSizeGuide.addEventListener('click', closeSizeGuideModal);
+        
+        // Add size guide link
+        const sizeGuideLink = document.createElement('a');
+        sizeGuideLink.href = '#';
+        sizeGuideLink.id = 'size-guide-link';
+        sizeGuideLink.innerHTML = '<i class="fas fa-ruler-combined"></i> Size Guide';
+        sizeGuideLink.style.cssText = `
+            color: var(--text-light);
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            transition: var(--transition);
+        `;
+        sizeGuideLink.addEventListener('mouseover', () => {
+            sizeGuideLink.style.color = 'var(--secondary)';
+        });
+        sizeGuideLink.addEventListener('mouseout', () => {
+            sizeGuideLink.style.color = 'var(--text-light)';
+        });
+        sizeGuideLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openSizeGuide();
+        });
+        
+        // Add size guide to product actions
+        document.querySelectorAll('.product-actions-bottom').forEach(actions => {
+            actions.parentElement.appendChild(sizeGuideLink.cloneNode(true));
+        });
+        
+        // Load recently viewed from localStorage
+        loadRecentlyViewed();
+        
+        // Update product cards with new features
+        updateProductCards();
+    }
+    
+    // Update product cards with new features
+    function updateProductCards() {
+        document.querySelectorAll('.product-card').forEach(card => {
+            const productId = parseInt(card.querySelector('.add-to-cart').getAttribute('data-id'));
             const product = products.find(p => p.id === productId);
             
             if (!product) return;
             
-            // Check if product with same ID and size already exists in cart
-            const existingItemIndex = cart.findIndex(item => 
-                item.id === productId && item.size === size
-            );
-            
-            if (existingItemIndex !== -1) {
-                // Increment quantity if item already exists
-                cart[existingItemIndex].quantity += 1;
-            } else {
-                // Add new item to cart
-                cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    size: size,
-                    image: product.desktopImage,
-                    quantity: 1
-                });
-            }
-            
-            updateCartUI();
-            showAddToCartMessage(product.name);
-        }
-
-        // Remove from Cart
-        function removeFromCart(productId, size) {
-            cart = cart.filter(item => !(item.id === productId && item.size === size));
-            updateCartUI();
-        }
-
-        // Update Cart UI
-        function updateCartUI() {
-            // Update cart count
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            cartCount.textContent = totalItems;
-            
-            // Update cart items
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = `
-                    <div class="empty-cart">
-                        <i class="fas fa-shopping-bag"></i>
-                        <p>Your cart is empty</p>
-                    </div>
-                `;
-                cartTotal.textContent = 'GH₵ 0.00';
-                return;
-            }
-            
-            let totalPrice = 0;
-            
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                totalPrice += itemTotal;
-                
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    <div class="cart-item-img">
-                        <img src="${item.image}" alt="${item.name}">
-                    </div>
-                    <div class="cart-item-details">
-                        <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-price">GH₵ ${item.price.toFixed(2)}</div>
-                        <div class="cart-item-actions">
-                            <div class="quantity-controls">
-                                <div class="quantity-btn minus" data-id="${item.id}" data-size="${item.size}">
-                                    <i class="fas fa-minus"></i>
-                                </div>
-                                <div class="quantity">${item.quantity}</div>
-                                <div class="quantity-btn plus" data-id="${item.id}" data-size="${item.size}">
-                                    <i class="fas fa-plus"></i>
-                                </div>
-                            </div>
-                            <div class="remove-item" data-id="${item.id}" data-size="${item.size}">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                cartItems.appendChild(cartItem);
-            });
-            
-            // Update total price
-            cartTotal.textContent = `GH₵ ${totalPrice.toFixed(2)}`;
-            
-            // Add event listeners to cart controls
-            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = parseInt(this.getAttribute('data-id'));
-                    const size = this.getAttribute('data-size');
-                    updateQuantity(id, size, 1);
-                });
-            });
-            
-            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = parseInt(this.getAttribute('data-id'));
-                    const size = this.getAttribute('data-size');
-                    updateQuantity(id, size, -1);
-                });
-            });
-            
-            document.querySelectorAll('.remove-item').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = parseInt(this.getAttribute('data-id'));
-                    const size = this.getAttribute('data-size');
-                    removeFromCart(id, size);
-                });
-            });
-        }
-
-        // Update item quantity in cart
-        function updateQuantity(productId, size, change) {
-            const itemIndex = cart.findIndex(item => 
-                item.id === productId && item.size === size
-            );
-            
-            if (itemIndex !== -1) {
-                cart[itemIndex].quantity += change;
-                
-                // Remove item if quantity becomes 0
-                if (cart[itemIndex].quantity <= 0) {
-                    cart.splice(itemIndex, 1);
-                }
-                
-                updateCartUI();
-            }
-        }
-
-        // Open cart sidebar
-        function openCart() {
-            cartSidebar.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close cart sidebar
-        function closeCartSidebar() {
-            cartSidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Open checkout modal
-        function openCheckout() {
-            if (cart.length === 0) {
-                alert('Your cart is empty. Add some products before checkout.');
-                return;
-            }
-            
-            closeCartSidebar();
-            updateCheckoutSummary();
-            checkoutModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close checkout modal
-        function closeCheckoutModal() {
-            checkoutModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Back to cart from checkout
-        function backToCartFromCheckout() {
-            closeCheckoutModal();
-            openCart();
-        }
-
-        // Update checkout summary
-        function updateCheckoutSummary() {
-            checkoutSummary.innerHTML = '';
-            let subtotal = 0;
-            const shipping = 20; // Fixed shipping cost
-            
-            cart.forEach(item => {
-                const itemTotal = item.price * item.quantity;
-                subtotal += itemTotal;
-                
-                const orderItem = document.createElement('div');
-                orderItem.className = 'order-item';
-                orderItem.innerHTML = `
-                    <div>${item.name} (${item.size}) x ${item.quantity}</div>
-                    <div>GH₵ ${itemTotal.toFixed(2)}</div>
-                `;
-                
-                checkoutSummary.appendChild(orderItem);
-            });
-            
-            const total = subtotal + shipping;
-            
-            const orderTotal = document.createElement('div');
-            orderTotal.className = 'order-total';
-            orderTotal.innerHTML = `
-                <div>Total</div>
-                <div>GH₵ ${total.toFixed(2)}</div>
+            // Add top action buttons
+            const actionsTop = document.createElement('div');
+            actionsTop.className = 'product-actions-top';
+            actionsTop.innerHTML = `
+                <div class="action-btn wishlist-btn ${wishlist.some(w => w.id === productId) ? 'active' : ''}" 
+                     data-id="${productId}">
+                    <i class="${wishlist.some(w => w.id === productId) ? 'fas' : 'far'} fa-heart"></i>
+                </div>
+                <div class="action-btn quickview-btn" data-id="${productId}">
+                    <i class="fas fa-expand-alt"></i>
+                </div>
+                <div class="action-btn compare-btn" data-id="${productId}">
+                    <i class="fas fa-balance-scale"></i>
+                    <span class="compare-count">0</span>
+                </div>
             `;
             
-            checkoutSummary.appendChild(orderTotal);
-        }
-
-        // Place order handler
-        function placeOrderHandler() {
-            // Validate form
-            const firstName = document.getElementById('first-name').value;
-            const lastName = document.getElementById('last-name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const city = document.getElementById('city').value;
-            const postalCode = document.getElementById('postal-code').value;
-            const momoNumber = document.getElementById('momo-number').value;
+            // Add stock status
+            const stockStatus = document.createElement('div');
+            stockStatus.className = 'stock-status in-stock';
+            stockStatus.textContent = 'In Stock';
             
-            if (!firstName || !lastName || !email || !phone || !address || !city || !postalCode || !momoNumber) {
-                alert('Please fill in all required fields.');
+            // Insert at beginning of product info
+            const productInfo = card.querySelector('.product-info');
+            productInfo.insertBefore(stockStatus, productInfo.firstChild);
+            
+            // Insert before product image
+            card.querySelector('.product-img').parentElement.insertBefore(actionsTop, card.querySelector('.product-img'));
+            
+            // Add event listeners
+            const wishlistBtn = actionsTop.querySelector('.wishlist-btn');
+            wishlistBtn.addEventListener('click', () => toggleWishlist(productId));
+            
+            const quickviewBtn = actionsTop.querySelector('.quickview-btn');
+            quickviewBtn.addEventListener('click', () => openQuickview(productId));
+            
+            const compareBtn = actionsTop.querySelector('.compare-btn');
+            compareBtn.addEventListener('click', () => toggleCompare(productId));
+        });
+    }
+    
+    // Wishlist functions
+    function toggleWishlist(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        const index = wishlist.findIndex(item => item.id === productId);
+        
+        if (index !== -1) {
+            // Remove from wishlist
+            wishlist.splice(index, 1);
+            showToast('Removed from Wishlist', `${product.name} has been removed from your wishlist`, 'info');
+        } else {
+            // Add to wishlist
+            wishlist.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.desktopImage,
+                category: product.category
+            });
+            showToast('Added to Wishlist', `${product.name} has been added to your wishlist`, 'success');
+        }
+        
+        updateWishlistUI();
+        saveToLocalStorage();
+    }
+    
+    function updateWishlistUI() {
+        // Update wishlist count
+        const wishlistCount = document.querySelector('.wishlist-count');
+        if (wishlistCount) {
+            wishlistCount.textContent = wishlist.length;
+        }
+        
+        // Update wishlist sidebar
+        wishlistItems.innerHTML = '';
+        
+        if (wishlist.length === 0) {
+            wishlistItems.innerHTML = `
+                <div class="empty-wishlist">
+                    <i class="far fa-heart"></i>
+                    <p>Your wishlist is empty</p>
+                </div>
+            `;
+            return;
+        }
+        
+        wishlist.forEach(item => {
+            const wishlistItem = document.createElement('div');
+            wishlistItem.className = 'wishlist-item';
+            wishlistItem.innerHTML = `
+                <div class="remove-wishlist" data-id="${item.id}">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="wishlist-item-img">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="wishlist-item-details">
+                    <div class="wishlist-item-title">${item.name}</div>
+                    <div class="wishlist-item-price">GH₵ ${item.price.toFixed(2)}</div>
+                    <div class="wishlist-item-actions">
+                        <button class="btn-secondary add-to-cart-from-wishlist" data-id="${item.id}">
+                            Add to Cart
+                        </button>
+                        <button class="btn-primary view-product" data-id="${item.id}">
+                            View
+                        </button>
+                    </div>
+                </div>
+            `;
+            wishlistItems.appendChild(wishlistItem);
+        });
+        
+        // Add event listeners
+        document.querySelectorAll('.remove-wishlist').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = parseInt(this.getAttribute('data-id'));
+                removeFromWishlist(id);
+            });
+        });
+        
+        document.querySelectorAll('.add-to-cart-from-wishlist').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = parseInt(this.getAttribute('data-id'));
+                addToCartFromWishlist(id);
+            });
+        });
+        
+        document.querySelectorAll('.view-product').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = parseInt(this.getAttribute('data-id'));
+                viewProductFromWishlist(id);
+            });
+        });
+    }
+    
+    function removeFromWishlist(productId) {
+        wishlist = wishlist.filter(item => item.id !== productId);
+        updateWishlistUI();
+        saveToLocalStorage();
+        showToast('Removed from Wishlist', 'Item has been removed from your wishlist', 'info');
+    }
+    
+    function addToCartFromWishlist(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        addToCart(productId, product.sizes[0]);
+        showToast('Added to Cart', `${product.name} has been added to your cart`, 'success');
+    }
+    
+    function viewProductFromWishlist(productId) {
+        openQuickview(productId);
+        closeWishlistSidebar();
+    }
+    
+    function addAllWishlistToCart() {
+        if (wishlist.length === 0) return;
+        
+        wishlist.forEach(item => {
+            const product = products.find(p => p.id === item.id);
+            if (product) {
+                addToCart(item.id, product.sizes[0]);
+            }
+        });
+        
+        showToast('Added All to Cart', 'All items from your wishlist have been added to cart', 'success');
+    }
+    
+    function openWishlist() {
+        wishlistSidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeWishlistSidebar() {
+        wishlistSidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Quickview functions
+    function openQuickview(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        // Add to recently viewed
+        addToRecentlyViewed(productId);
+        
+        const sizeOptions = product.sizes.map(size => 
+            `<option value="${size}">${size}</option>`
+        ).join('');
+        
+        quickviewBody.innerHTML = `
+            <div class="quickview-product">
+                <div class="quickview-image">
+                    <img src="${product.desktopImage}" alt="${product.name}">
+                </div>
+                <div class="quickview-details">
+                    <h2>${product.name}</h2>
+                    <div class="product-category">${formatCategory(product.category)}</div>
+                    <div class="quickview-price">GH₵ ${product.price.toFixed(2)}</div>
+                    <div class="product-rating">
+                        <div class="stars">${generateStarRating(product.rating)}</div>
+                        <div class="rating-count">(${product.reviews} reviews)</div>
+                    </div>
+                    <div class="quickview-description">
+                        Premium quality ${product.category} with excellent craftsmanship. Made from high-quality materials for durability and comfort.
+                    </div>
+                    <div class="quickview-actions">
+                        <select class="size-select" id="quickview-size-${product.id}">
+                            ${sizeOptions}
+                        </select>
+                        <button class="btn-primary add-to-cart-quickview" data-id="${product.id}">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                    </div>
+                    <button class="wishlist-btn ${wishlist.some(w => w.id === productId) ? 'active' : ''}" 
+                            data-id="${product.id}" style="margin-right: 10px; padding: 10px 20px;">
+                        <i class="${wishlist.some(w => w.id === productId) ? 'fas' : 'far'} fa-heart"></i>
+                        ${wishlist.some(w => w.id === productId) ? 'In Wishlist' : 'Add to Wishlist'}
+                    </button>
+                    <button class="btn-secondary compare-btn" data-id="${product.id}">
+                        <i class="fas fa-balance-scale"></i> Compare
+                    </button>
+                    <div class="quickview-features">
+                        <h4>Product Features:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Premium Quality Materials</li>
+                            <li><i class="fas fa-check"></i> Comfortable Fit</li>
+                            <li><i class="fas fa-check"></i> Durable Construction</li>
+                            <li><i class="fas fa-check"></i> Easy to Clean</li>
+                            <li><i class="fas fa-check"></i> 30-Day Return Policy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        quickviewModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Add event listeners
+        const addToCartBtn = document.querySelector('.add-to-cart-quickview');
+        addToCartBtn.addEventListener('click', () => {
+            const sizeSelect = document.getElementById(`quickview-size-${product.id}`);
+            const selectedSize = sizeSelect.value;
+            addToCart(productId, selectedSize);
+            closeQuickviewModal();
+        });
+        
+        const wishlistBtn = document.querySelector('.wishlist-btn');
+        wishlistBtn.addEventListener('click', () => {
+            toggleWishlist(productId);
+            wishlistBtn.innerHTML = `<i class="${wishlist.some(w => w.id === productId) ? 'fas' : 'far'} fa-heart"></i>
+                ${wishlist.some(w => w.id === productId) ? 'In Wishlist' : 'Add to Wishlist'}`;
+            wishlistBtn.classList.toggle('active');
+        });
+        
+        const compareBtn = document.querySelector('.compare-btn');
+        compareBtn.addEventListener('click', () => {
+            toggleCompare(productId);
+        });
+    }
+    
+    function closeQuickviewModal() {
+        quickviewModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Toast notifications
+    function showToast(title, message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <div class="toast-content">
+                <div class="toast-title">${title}</div>
+                <div class="toast-message">${message}</div>
+            </div>
+            <div class="toast-close">
+                <i class="fas fa-times"></i>
+            </div>
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        // Add event listener to close button
+        toast.querySelector('.toast-close').addEventListener('click', () => {
+            removeToast(toast);
+        });
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            removeToast(toast);
+        }, 5000);
+    }
+    
+    function removeToast(toast) {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+            if (toast.parentElement) {
+                toast.parentElement.removeChild(toast);
+            }
+        }, 300);
+    }
+    
+    // Recently viewed functionality
+    function addToRecentlyViewed(productId) {
+        if (!recentlyViewed.includes(productId)) {
+            recentlyViewed.unshift(productId);
+            // Keep only last 4 items
+            if (recentlyViewed.length > 4) {
+                recentlyViewed.pop();
+            }
+            updateRecentlyViewedUI();
+            saveToLocalStorage();
+        }
+    }
+    
+    function updateRecentlyViewedUI() {
+        if (recentlyViewed.length === 0) {
+            recentlyViewedGrid.innerHTML = '<p style="text-align: center; color: var(--text-light);">No recently viewed items</p>';
+            return;
+        }
+        
+        recentlyViewedGrid.innerHTML = '';
+        
+        recentlyViewed.forEach(productId => {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            productCard.innerHTML = `
+                <div class="product-img" data-image="${product.desktopImage}">
+                    <img src="${product.desktopImage}" alt="${product.name}" class="desktop-img">
+                    <img src="${product.mobileImage}" alt="${product.name}" class="mobile-img">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">${formatCategory(product.category)}</div>
+                    <h3 class="product-title">${product.name}</h3>
+                    <div class="product-price">GH₵ ${product.price.toFixed(2)}</div>
+                    <button class="btn-primary view-again" data-id="${product.id}" style="width: 100%; margin-top: 10px;">
+                        View Again
+                    </button>
+                </div>
+            `;
+            
+            recentlyViewedGrid.appendChild(productCard);
+            
+            // Add event listener to view again button
+            productCard.querySelector('.view-again').addEventListener('click', () => {
+                openQuickview(product.id);
+            });
+        });
+    }
+    
+    // Size guide functions
+    function openSizeGuide() {
+        sizeGuideModal.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeSizeGuideModal() {
+        sizeGuideModal.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Compare functionality
+    function toggleCompare(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        const index = comparedProducts.findIndex(id => id === productId);
+        
+        if (index !== -1) {
+            comparedProducts.splice(index, 1);
+            showToast('Removed from Compare', `${product.name} has been removed from comparison`, 'info');
+        } else {
+            if (comparedProducts.length >= 3) {
+                showToast('Limit Reached', 'You can compare up to 3 products at a time', 'error');
                 return;
             }
-            
-            // Process order (in a real app, this would send data to a server)
-            alert('Order placed successfully! Thank you for your purchase.');
-            
-            // Clear cart and close modals
-            cart = [];
-            updateCartUI();
-            closeCheckoutModal();
-            
-            // Reset form
-            document.getElementById('first-name').value = '';
-            document.getElementById('last-name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('phone').value = '';
-            document.getElementById('address').value = '';
-            document.getElementById('city').value = '';
-            document.getElementById('postal-code').value = '';
-            document.getElementById('momo-number').value = '';
+            comparedProducts.push(productId);
+            showToast('Added to Compare', `${product.name} has been added to comparison`, 'success');
         }
-
-        // Show add to cart message
-        function showAddToCartMessage(productName) {
-            // Create a temporary notification
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 100px;
-                right: 20px;
-                background: var(--success);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 5px;
-                box-shadow: var(--shadow);
-                z-index: 3000;
-                transition: var(--transition);
-                transform: translateX(100%);
-                opacity: 0;
-            `;
-            notification.innerHTML = `
-                <i class="fas fa-check-circle"></i> ${productName} added to cart!
-            `;
-            
-            document.body.appendChild(notification);
-            
-            // Animate in
-            setTimeout(() => {
-                notification.style.transform = 'translateX(0)';
-                notification.style.opacity = '1';
-            }, 10);
-            
-            // Animate out after 3 seconds
-            setTimeout(() => {
-                notification.style.transform = 'translateX(100%)';
-                notification.style.opacity = '0';
-                
-                // Remove from DOM after animation
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
+        
+        updateCompareUI();
+    }
+    
+    function updateCompareUI() {
+        // Update compare count on all buttons
+        document.querySelectorAll('.compare-count').forEach(count => {
+            count.textContent = comparedProducts.length;
+        });
+        
+        // If we have 2+ products, show compare button
+        if (comparedProducts.length >= 2) {
+            showCompareButton();
+        } else {
+            hideCompareButton();
         }
+    }
+    
+    function showCompareButton() {
+        // Remove existing compare button if any
+        const existingBtn = document.querySelector('.compare-now-btn');
+        if (existingBtn) existingBtn.remove();
+        
+        const compareBtn = document.createElement('button');
+        compareBtn.className = 'compare-now-btn btn-primary';
+        compareBtn.innerHTML = `<i class="fas fa-balance-scale"></i> Compare (${comparedProducts.length})`;
+        compareBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 12px 25px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        `;
+        compareBtn.addEventListener('click', openCompareView);
+        document.body.appendChild(compareBtn);
+    }
+    
+    function hideCompareButton() {
+        const existingBtn = document.querySelector('.compare-now-btn');
+        if (existingBtn) existingBtn.remove();
+    }
+    
+    function openCompareView() {
+        // This would open a comparison table showing all compared products
+        showToast('Compare Feature', `Comparing ${comparedProducts.length} products`, 'info');
+        // In a full implementation, this would open a modal with detailed comparison
+    }
+    
+    // LocalStorage functions
+    function saveToLocalStorage() {
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+        localStorage.setItem('comparedProducts', JSON.stringify(comparedProducts));
+    }
+    
+    function loadFromLocalStorage() {
+        const savedWishlist = localStorage.getItem('wishlist');
+        const savedRecentlyViewed = localStorage.getItem('recentlyViewed');
+        const savedComparedProducts = localStorage.getItem('comparedProducts');
+        
+        if (savedWishlist) wishlist = JSON.parse(savedWishlist);
+        if (savedRecentlyViewed) recentlyViewed = JSON.parse(savedRecentlyViewed);
+        if (savedComparedProducts) comparedProducts = JSON.parse(savedComparedProducts);
+    }
+    
+    function loadRecentlyViewed() {
+        loadFromLocalStorage();
+        updateRecentlyViewedUI();
+        updateWishlistUI();
+        updateCompareUI();
+    }
+    
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            initializeNewFeatures();
+        }, 100);
+    });
+</script>
     </script>
 </body>
 </html>
+
